@@ -1,3 +1,5 @@
+<html>
+    <body>
 <!-- Connect with Me Section -->
     <section class="connect" id="connect">
         <h2>Connect with Me</h2>
@@ -8,3 +10,35 @@
             <a href="https://github.com/hmpmanish" target="_blank"><img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="GitHub"></a>
         </div>
     </section>
+
+    
+        
+
+    <!-- Script to Send Contact Form Data to SheetDB -->
+    <script src="https://sheetdb.io/s/f/ygo5rga9xzqdn.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+            
+            fetch('https://sheetdb.io/api/v1/ygo5rga9xzqdn', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ data: data })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Message sent successfully!");
+                e.target.reset();
+            })
+            .catch(error => {
+                alert("There was an error sending the message.");
+            });
+        });
+    </script>
+
+</body>
+</html>
